@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Hizpark\DirectoryTree\DirectoryTreeViewer;
+
+// 获取参数
+$options = getopt('p:f:', ['path:', 'format:']); // f 和 format 都是必须的
+
+// 获取路径
+$path = $options['p'] ?? $options['path'] ?? null;
+// 获取格式，默认为 'text_tree'
+$format = $options['f'] ?? $options['format'] ?? 'text_tree';
+
+if (!$path) {
+    fwrite(STDERR, "Usage: dtv -p <path> [-f format]\n");
+    fwrite(STDERR, "Formats: text_indented, text_tree, html_list\n");
+    exit(1);
+}
+
+try {
+    $viewer = new DirectoryTreeViewer();
+    echo $viewer->render($path, $format) . PHP_EOL;
+} catch (Throwable $e) {
+    fwrite(STDERR, "Error: " . $e->getMessage() . "\n");
+    exit(1);
+}
