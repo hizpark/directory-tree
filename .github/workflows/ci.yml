@@ -24,13 +24,10 @@ jobs:
             coverage: 'true'
           - php: '8.4'
             coverage: 'false'
-    continue-on-error: ${{ matrix.php != '8.3' }}
 
     steps:
       - name: 🔄 Checkout Code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: 🗃️ Cache Dependencies
         uses: actions/cache@v3
@@ -70,17 +67,24 @@ jobs:
           files: coverage.xml
 
   release:
-    name: 🏷️ Create Git Tag Release
+    name: 🏷️ Create Tag Release
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     needs: test
-    if: startsWith(github.ref, 'refs/tags/v')
     permissions:
       contents: write
+
     steps:
-      - name: 🔄 Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: ✅ Validate Tag Format
+        run: |
+          if [[ ! "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error ::Tag must be semantic (e.g. v1.2.3)"
+            exit 1
+          fi
+
+      - name: 📛 Set Release Metadata
+        run: |
+          echo "Releasing ${{ github.ref_name }}"
 
       - name: 🚀 Publish Release
         uses: softprops/action-gh-release@v1
@@ -92,5 +96,3 @@ jobs:
           body: |
             🎉 Release ${{ github.ref_name }}
             [📖 README Documentation](https://github.com/hizpark/directory-tree#readme)
-          prerelease: false
-          draft: false
