@@ -4,8 +4,7 @@
          colors="true"
          failOnRisky="true"
          failOnWarning="true"
-         failOnDeprecation="true"
->
+         failOnDeprecation="true">
     <testsuites>
         <testsuite name="DirectoryTree Tests">
             <directory suffix="Test.php">tests</directory>
