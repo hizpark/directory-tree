@@ -7,12 +7,11 @@
 # PHPStan 配置文件
 phpstan.neon
 
-# PHPUnit 配置文件
-phpunit.xml
-
-# PHP CS Fixer 缓存
+# PHP CS Fixer 配置和缓存
+.php-cs-fixer.php
 .php-cs-fixer.cache
 
-# PHPUnit 测试缓存及覆盖率报告
+# PHPUnit 配置和缓存
+phpunit.xml
 .phpunit_cache/
 .phpunit_coverage/
