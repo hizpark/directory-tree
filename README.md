@@ -195,6 +195,6 @@ composer test:coverage
 3. 提交 PR 前请确保测试通过、风格一致
 4. 提交详细描述
 
-## 📝 License
+## 📜 License
 
 MIT License. See the [LICENSE](LICENSE) file for details.
