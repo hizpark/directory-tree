@@ -29,17 +29,21 @@ composer require hizpark/directory-tree
 
 ```txt
 src
-├── Contract
-│   ├── NodeInterface.php
-│   ├── TreeBuilderInterface.php
-│   └── TreeMemoryInterface.php
+├── Builder
+│   ├── DirectoryTreeBuilder.php
+│   └── TreeBuilderInterface.php
 ├── Exception
 │   └── DirectoryTreeException.php
-├── DirectoryNode.php
-├── DirectoryTreeBuilder.php
-├── DirectoryTreeMemory.php
-├── DirectoryTreeTransformer.php
-└── DirectoryTreeViewer.php
+├── Memory
+│   ├── DirectoryTreeMemory.php
+│   └── TreeMemoryInterface.php
+├── Node
+│   ├── DirectoryNode.php
+│   └── NodeInterface.php
+├── Transformer
+│   └── DirectoryTreeTransformer.php
+└── Viewer
+    └── DirectoryTreeViewer.php
 ```
 
 ## 🚀 使用示例
@@ -62,13 +66,10 @@ $viewer = new DirectoryTreeViewer();
 
 // HTML列表格式
 echo $viewer->render('/path/to/directory', DirectoryTreeViewer::FORMAT_HTML_LIST);
-
 // Markdown列表格式
 echo $viewer->render('/path/to/directory', DirectoryTreeViewer::FORMAT_MARKDOWN_LIST);
-
 // 文本缩进格式
 echo $viewer->render('/path/to/directory', DirectoryTreeViewer::FORMAT_TEXT_INDENTED);
-
 // 树状文本格式(默认)
 echo $viewer->render('/path/to/directory', DirectoryTreeViewer::FORMAT_TEXT_TREE);
 ```
@@ -80,13 +81,14 @@ echo $viewer->render('/path/to/directory', DirectoryTreeViewer::FORMAT_TEXT_TREE
 > 定义目录树节点的基本接口
 
 ```php
-namespace Hizpark\DirectoryTree\Contract;
+namespace Hizpark\DirectoryTree\Node;
 
 interface NodeInterface
 {
-    public function getParent(): ?\Hizpark\DirectoryTree\Node\NodeInterface;
     public function getPath(): string;
     public function getLocation(): string;
+    public function getParent(): ?NodeInterface;
+    public function addChild(NodeInterface $child): void;
     public function getChildren(): ?array;
 }
 ```
@@ -96,9 +98,12 @@ interface NodeInterface
 > 定义构建目录树结构的接口
 
 ```php
-namespace Hizpark\DirectoryTree\Contract;
+namespace Hizpark\DirectoryTree\Builder;
 
-use Hizpark\DirectoryTree\Memory\TreeMemoryInterface;use Hizpark\DirectoryTree\Node\NodeInterface;interface TreeBuilderInterface
+use Hizpark\DirectoryTree\Memory\TreeMemoryInterface;
+use Hizpark\DirectoryTree\Node\NodeInterface;
+
+interface TreeBuilderInterface
 {
     public function build(NodeInterface $root): TreeMemoryInterface;
 }
@@ -109,9 +114,11 @@ use Hizpark\DirectoryTree\Memory\TreeMemoryInterface;use Hizpark\DirectoryTree\N
 > 定义目录树内存操作的接口
 
 ```php
-namespace Hizpark\DirectoryTree\Contract;
+namespace Hizpark\DirectoryTree\Memory;
 
-use Hizpark\DirectoryTree\Node\NodeInterface;interface TreeMemoryInterface
+use Hizpark\DirectoryTree\Node\NodeInterface;
+
+interface TreeMemoryInterface
 {
     public function getRoot(): NodeInterface;
     public function getAncestors(NodeInterface $node): array;
@@ -123,32 +130,60 @@ use Hizpark\DirectoryTree\Node\NodeInterface;interface TreeMemoryInterface
 ## 🛠️ 核心类说明
 
 ### DirectoryNode
+
+> Namespace: `Hizpark\DirectoryTree\Node`
+
 - 实现 NodeInterface
 - 代表目录树中的单个节点
 - 包含路径、父节点、子节点等信息
 - 自动验证路径有效性
 
 ### DirectoryTreeBuilder
+
+> Namespace: `Hizpark\DirectoryTree\Builder`
+
 - 实现 TreeBuilderInterface
 - 使用迭代方式构建目录树
 - 自动排序文件和目录
 - 支持大目录处理
 
 ### DirectoryTreeMemory
+
+> Namespace: `Hizpark\DirectoryTree\Memory`
+
 - 实现 TreeMemoryInterface
 - 提供树结构查询功能：获取祖先节点，获取兄弟节点，获取后代节点
 - 使用BFS算法遍历
 
 ### DirectoryTreeTransformer
+
+> Namespace: `Hizpark\DirectoryTree\Transformer`
+
 - 目录树结构转换器
 - 支持多种输出格式转换： 数组，JSON，XML，HTML列表，Markdown列表，缩进文本，ASCII树状文本
 - 保持原始目录结构
 - 自动处理特殊字符转义
 
 ### DirectoryTreeViewer
+
+> Namespace: `Hizpark\DirectoryTree\Viewer`
+
 - 提供简化的渲染接口
 - 支持多种输出格式：HTML列表，Markdown列表，文本缩进，树状文本
 - 内置异常处理
+
+`DirectoryTreeViewer::render(string $path, int $format = self::FORMAT_TEXT_TREE)`
+
+#### `$format` 可选值
+
+| 常量名                                       | 值 | 描述            |
+|-------------------------------------------|---|---------------|
+| DirectoryTreeViewer::FORMAT_TEXT_TREE     | 1 | 树状文本格式        |
+| DirectoryTreeViewer::FORMAT_TEXT_INDENTED | 2 | 缩进文本格式        |
+| DirectoryTreeViewer::FORMAT_MARKDOWN_LIST | 3 | Markdown 列表格式 |
+| DirectoryTreeViewer::FORMAT_HTML_LIST     | 4 | HTML 列表格式     |
+
+> 默认值： `DirectoryTreeViewer::FORMAT_TEXT_TREE`
 
 ## 🔍 静态分析
 
