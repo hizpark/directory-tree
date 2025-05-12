@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\DirectoryTree;
+namespace Hizpark\DirectoryTree\Builder;
 
 use FilesystemIterator;
-use Hizpark\DirectoryTree\Contract\NodeInterface;
-use Hizpark\DirectoryTree\Contract\TreeBuilderInterface;
-use Hizpark\DirectoryTree\Contract\TreeMemoryInterface;
 use Hizpark\DirectoryTree\Exception\DirectoryTreeException;
+use Hizpark\DirectoryTree\Memory\DirectoryTreeMemory;
+use Hizpark\DirectoryTree\Memory\TreeMemoryInterface;
+use Hizpark\DirectoryTree\Node\DirectoryNode;
+use Hizpark\DirectoryTree\Node\NodeInterface;
 use SplFileInfo;
 use UnexpectedValueException;
 

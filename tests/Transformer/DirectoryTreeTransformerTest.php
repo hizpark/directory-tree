@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\DirectoryTree\Tests;
+namespace Hizpark\DirectoryTree\Tests\Transformer;
 
 use DOMDocument;
-use Hizpark\DirectoryTree\DirectoryNode;
-use Hizpark\DirectoryTree\DirectoryTreeMemory;
-use Hizpark\DirectoryTree\DirectoryTreeTransformer;
+use Hizpark\DirectoryTree\Memory\DirectoryTreeMemory;
+use Hizpark\DirectoryTree\Node\DirectoryNode;
+use Hizpark\DirectoryTree\Transformer\DirectoryTreeTransformer;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;

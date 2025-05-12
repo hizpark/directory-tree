@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\DirectoryTree;
+namespace Hizpark\DirectoryTree\Node;
 
-use Hizpark\DirectoryTree\Contract\NodeInterface;
 use Hizpark\DirectoryTree\Exception\DirectoryTreeException;
 
 class DirectoryNode implements NodeInterface

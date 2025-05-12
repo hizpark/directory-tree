@@ -3,7 +3,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Hizpark\DirectoryTree\DirectoryTreeViewer;
+use Hizpark\DirectoryTree\Viewer\DirectoryTreeViewer;
 
 // 获取参数
 $options = getopt('p:f:', ['path:', 'format:']); // f 和 format 都是必须的

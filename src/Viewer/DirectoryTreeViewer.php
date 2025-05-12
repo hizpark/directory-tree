@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\DirectoryTree;
+namespace Hizpark\DirectoryTree\Viewer;
 
+use Hizpark\DirectoryTree\Builder\DirectoryTreeBuilder;
 use Hizpark\DirectoryTree\Exception\DirectoryTreeException;
+use Hizpark\DirectoryTree\Node\DirectoryNode;
+use Hizpark\DirectoryTree\Transformer\DirectoryTreeTransformer;
 
 class DirectoryTreeViewer
 {

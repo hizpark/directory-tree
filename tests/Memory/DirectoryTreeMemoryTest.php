@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\DirectoryTree\Tests;
+namespace Hizpark\DirectoryTree\Tests\Memory;
 
-use Hizpark\DirectoryTree\DirectoryNode;
-use Hizpark\DirectoryTree\DirectoryTreeMemory;
+use Hizpark\DirectoryTree\Memory\DirectoryTreeMemory;
+use Hizpark\DirectoryTree\Node\DirectoryNode;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;

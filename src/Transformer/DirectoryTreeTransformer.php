@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\DirectoryTree;
+namespace Hizpark\DirectoryTree\Transformer;
 
-use Hizpark\DirectoryTree\Contract\NodeInterface;
-use Hizpark\DirectoryTree\Contract\TreeMemoryInterface;
 use Hizpark\DirectoryTree\Exception\DirectoryTreeException;
+use Hizpark\DirectoryTree\Memory\TreeMemoryInterface;
+use Hizpark\DirectoryTree\Node\NodeInterface;
 use SimpleXMLElement;
 
 class DirectoryTreeTransformer

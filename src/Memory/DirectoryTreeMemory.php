@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\DirectoryTree;
+namespace Hizpark\DirectoryTree\Memory;
 
-use Hizpark\DirectoryTree\Contract\NodeInterface;
-use Hizpark\DirectoryTree\Contract\TreeMemoryInterface;
+use Hizpark\DirectoryTree\Node\NodeInterface;
 
 class DirectoryTreeMemory implements TreeMemoryInterface
 {

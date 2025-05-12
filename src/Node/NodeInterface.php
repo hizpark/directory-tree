@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\DirectoryTree\Contract;
+namespace Hizpark\DirectoryTree\Node;
 
 interface NodeInterface
 {

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\DirectoryTree\Contract;
+namespace Hizpark\DirectoryTree\Memory;
+
+use Hizpark\DirectoryTree\Node\NodeInterface;
 
 interface TreeMemoryInterface
 {

@@ -47,7 +47,7 @@ src
 ### 示例1：基本目录树渲染
 
 ```php
-use Hizpark\DirectoryTree\DirectoryTreeViewer;
+use Hizpark\DirectoryTree\Viewer\DirectoryTreeViewer;
 
 $viewer = new DirectoryTreeViewer();
 echo $viewer->render('/path/to/directory');
@@ -56,7 +56,7 @@ echo $viewer->render('/path/to/directory');
 ### 示例2：多种格式输出
 
 ```php
-use Hizpark\DirectoryTree\DirectoryTreeViewer;
+use Hizpark\DirectoryTree\Viewer\DirectoryTreeViewer;
 
 $viewer = new DirectoryTreeViewer();
 
@@ -84,7 +84,7 @@ namespace Hizpark\DirectoryTree\Contract;
 
 interface NodeInterface
 {
-    public function getParent(): ?NodeInterface;
+    public function getParent(): ?\Hizpark\DirectoryTree\Node\NodeInterface;
     public function getPath(): string;
     public function getLocation(): string;
     public function getChildren(): ?array;
@@ -98,7 +98,7 @@ interface NodeInterface
 ```php
 namespace Hizpark\DirectoryTree\Contract;
 
-interface TreeBuilderInterface
+use Hizpark\DirectoryTree\Memory\TreeMemoryInterface;use Hizpark\DirectoryTree\Node\NodeInterface;interface TreeBuilderInterface
 {
     public function build(NodeInterface $root): TreeMemoryInterface;
 }
@@ -111,7 +111,7 @@ interface TreeBuilderInterface
 ```php
 namespace Hizpark\DirectoryTree\Contract;
 
-interface TreeMemoryInterface
+use Hizpark\DirectoryTree\Node\NodeInterface;interface TreeMemoryInterface
 {
     public function getRoot(): NodeInterface;
     public function getAncestors(NodeInterface $node): array;
