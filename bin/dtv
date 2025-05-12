@@ -11,7 +11,7 @@ $options = getopt('p:f:', ['path:', 'format:']); // f 和 format 都是必须的
 // 获取路径
 $path = $options['p'] ?? $options['path'] ?? null;
 // 获取格式，默认为 'text_tree'
-$format = $options['f'] ?? $options['format'] ?? 'text_tree';
+$format = $options['f'] ?? $options['format'] ?? DirectoryTreeViewer::FORMAT_TEXT_TREE;
 
 if (!$path) {
     fwrite(STDERR, "Usage: dtv -p <path> [-f format]\n");
